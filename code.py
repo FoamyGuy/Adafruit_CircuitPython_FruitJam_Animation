@@ -214,47 +214,53 @@ class OvershootAnimator:
         """Cancel the current animation."""
         self.pos_animating = False
 
-# apple_sprites, apple_sprites_palette = adafruit_imageload.load("apple_spritesheet.bmp")
-# f_sprites, f_sprites_palette = adafruit_imageload.load("f_spritesheet_indexed.bmp")
-# r_sprites, r_sprites_palette = adafruit_imageload.load("r_spritesheet.bmp")
-# u_sprites, u_sprites_palette = adafruit_imageload.load("u_spritesheet.bmp")
-# i_sprites, i_sprites_palette = adafruit_imageload.load("i_spritesheet.bmp")
-# t_sprites, t_sprites_palette = adafruit_imageload.load("t_spritesheet.bmp")
-# j_sprites, j_sprites_palette = adafruit_imageload.load("j_spritesheet_transparent.bmp")
-# j_sprites_palette.make_transparent(0)
-# a_sprites, a_sprites_palette = adafruit_imageload.load("a_spritesheet_transparent.bmp")
-# a_sprites_palette.make_transparent(0)
-# m_sprites, m_sprites_palette = adafruit_imageload.load("m_spritesheet_transparent.bmp")
-# m_sprites_palette.make_transparent(0)
-
-apple_sprites = OnDiskBitmap("apple_spritesheet.bmp")
-apple_sprites_palette = apple_sprites.pixel_shader
+apple_sprites, apple_sprites_palette = adafruit_imageload.load("apple_spritesheet.bmp")
 apple_sprites_palette.make_transparent(0)
-
-f_sprites = OnDiskBitmap("f_spritesheet.bmp")
-f_sprites_palette = f_sprites.pixel_shader
+f_sprites, f_sprites_palette = adafruit_imageload.load("f_spritesheet.bmp")
 f_sprites_palette.make_transparent(0)
-r_sprites = OnDiskBitmap("r_spritesheet.bmp")
-r_sprites_palette = r_sprites.pixel_shader
+r_sprites, r_sprites_palette = adafruit_imageload.load("r_spritesheet.bmp")
 r_sprites_palette.make_transparent(0)
-u_sprites = OnDiskBitmap("u_spritesheet.bmp")
-u_sprites_palette = u_sprites.pixel_shader
+u_sprites, u_sprites_palette = adafruit_imageload.load("u_spritesheet.bmp")
 u_sprites_palette.make_transparent(0)
-i_sprites = OnDiskBitmap("i_spritesheet.bmp")
-i_sprites_palette = i_sprites.pixel_shader
+i_sprites, i_sprites_palette = adafruit_imageload.load("i_spritesheet.bmp")
 i_sprites_palette.make_transparent(0)
-t_sprites = OnDiskBitmap("t_spritesheet.bmp")
-t_sprites_palette = t_sprites.pixel_shader
+t_sprites, t_sprites_palette = adafruit_imageload.load("t_spritesheet.bmp")
 t_sprites_palette.make_transparent(0)
-j_sprites = OnDiskBitmap("j_spritesheet.bmp")
-j_sprites_palette = j_sprites.pixel_shader
+j_sprites, j_sprites_palette = adafruit_imageload.load("j_spritesheet.bmp")
 j_sprites_palette.make_transparent(0)
-a_sprites = OnDiskBitmap("a_spritesheet.bmp")
-a_sprites_palette = a_sprites.pixel_shader
+a_sprites, a_sprites_palette = adafruit_imageload.load("a_spritesheet.bmp")
 a_sprites_palette.make_transparent(0)
-m_sprites = OnDiskBitmap("m_spritesheet.bmp")
-m_sprites_palette = m_sprites.pixel_shader
+m_sprites, m_sprites_palette = adafruit_imageload.load("m_spritesheet.bmp")
 m_sprites_palette.make_transparent(0)
+
+# apple_sprites = OnDiskBitmap("apple_spritesheet.bmp")
+# apple_sprites_palette = apple_sprites.pixel_shader
+# apple_sprites_palette.make_transparent(0)
+#
+# f_sprites = OnDiskBitmap("f_spritesheet.bmp")
+# f_sprites_palette = f_sprites.pixel_shader
+# f_sprites_palette.make_transparent(0)
+# r_sprites = OnDiskBitmap("r_spritesheet.bmp")
+# r_sprites_palette = r_sprites.pixel_shader
+# r_sprites_palette.make_transparent(0)
+# u_sprites = OnDiskBitmap("u_spritesheet.bmp")
+# u_sprites_palette = u_sprites.pixel_shader
+# u_sprites_palette.make_transparent(0)
+# i_sprites = OnDiskBitmap("i_spritesheet.bmp")
+# i_sprites_palette = i_sprites.pixel_shader
+# i_sprites_palette.make_transparent(0)
+# t_sprites = OnDiskBitmap("t_spritesheet.bmp")
+# t_sprites_palette = t_sprites.pixel_shader
+# t_sprites_palette.make_transparent(0)
+# j_sprites = OnDiskBitmap("j_spritesheet.bmp")
+# j_sprites_palette = j_sprites.pixel_shader
+# j_sprites_palette.make_transparent(0)
+# a_sprites = OnDiskBitmap("a_spritesheet.bmp")
+# a_sprites_palette = a_sprites.pixel_shader
+# a_sprites_palette.make_transparent(0)
+# m_sprites = OnDiskBitmap("m_spritesheet.bmp")
+# m_sprites_palette = m_sprites.pixel_shader
+# m_sprites_palette.make_transparent(0)
 
 default_sprite_delay = 1/35
 
@@ -267,6 +273,7 @@ letters_x_start = 83
 
 coordinator = {
     "steps": [
+        # Apple fly on
         {
             "type": "animation_step",
             "tilegrid": TileGrid(apple_sprites, pixel_shader=apple_sprites_palette,
@@ -282,6 +289,7 @@ coordinator = {
             "sprite_anim_start": 0.347,
             "started": False,
         },
+        # F fly on
         {
             "type": "animation_step",
             "tilegrid": TileGrid(f_sprites, pixel_shader=f_sprites_palette,
@@ -298,12 +306,13 @@ coordinator = {
             "started": False,
 
         },
+        # R fly on
         {
             "type": "animation_step",
             "tilegrid": TileGrid(r_sprites, pixel_shader=r_sprites_palette,
                                  tile_width=32, tile_height=39, width=1, height=1),
-            "offscreen_loc": (letters_x_start + 32 + 3, 240),
-            "onscreen_loc": (letters_x_start + 32 + 3, 50),
+            "offscreen_loc": (letters_x_start + 32 + 3 - 1, 240),
+            "onscreen_loc": (letters_x_start + 32 + 3 - 1, 50),
             "move_duration": 0.45,
             "overshoot_pixels": 20,
             "eased_value": None,
@@ -313,6 +322,7 @@ coordinator = {
             "sprite_anim_start": 0.347,
             "started": False,
         },
+        # Left slide everything
         {
             "type": "animation_step",
             "tilegrid": sliding_group,
@@ -328,12 +338,13 @@ coordinator = {
             "sprite_anim_start": None,
             "started": False,
         },
+        # U fly on
         {
             "type": "animation_step",
             "tilegrid": TileGrid(u_sprites, pixel_shader=u_sprites_palette,
                                  tile_width=32, tile_height=39, width=1, height=1),
-            "offscreen_loc": (letters_x_start + (32 + 3) * 2, 240),
-            "onscreen_loc": (letters_x_start + (32 + 3) * 2, 50),
+            "offscreen_loc": (letters_x_start + (32 + 3) * 2 -1, 240),
+            "onscreen_loc": (letters_x_start + (32 + 3) * 2 -1, 50),
             "move_duration": 0.45,
             "overshoot_pixels": 20,
             "eased_value": None,
@@ -343,12 +354,13 @@ coordinator = {
             "sprite_anim_start": 0.347,
             "started": False,
         },
+        # I fly on
         {
             "type": "animation_step",
             "tilegrid": TileGrid(i_sprites, pixel_shader=i_sprites_palette,
                                  tile_width=16, tile_height=39, width=1, height=1),
-            "offscreen_loc": (letters_x_start + (32 + 3) * 3, 240),
-            "onscreen_loc": (letters_x_start + (32 + 3) * 3, 50),
+            "offscreen_loc": (letters_x_start + (32 + 3) * 3 -1, 240),
+            "onscreen_loc": (letters_x_start + (32 + 3) * 3 -1, 50),
             "move_duration": 0.45,
             "overshoot_pixels": 20,
             "eased_value": None,
@@ -358,12 +370,13 @@ coordinator = {
             "sprite_anim_start": 0.347,
             "started": False,
         },
+        # T fly on
         {
             "type": "animation_step",
             "tilegrid": TileGrid(t_sprites, pixel_shader=t_sprites_palette,
                                  tile_width=32, tile_height=39, width=1, height=1),
-            "offscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3, 240),
-            "onscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3, 50),
+            "offscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3 -1, 240),
+            "onscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3 -1, 50),
             "move_duration": 0.45,
             "overshoot_pixels": 20,
             "eased_value": None,
@@ -373,6 +386,7 @@ coordinator = {
             "sprite_anim_start": 0.347,
             "started": False,
         },
+        # J fly on
         {
             "type": "animation_step",
             "tilegrid": TileGrid(j_sprites, pixel_shader=j_sprites_palette,
@@ -388,12 +402,13 @@ coordinator = {
             "sprite_anim_start": 0.347,
             "started": False,
         },
+        # A fly on
         {
             "type": "animation_step",
             "tilegrid": TileGrid(a_sprites, pixel_shader=a_sprites_palette,
                                  tile_width=33, tile_height=39, width=1, height=1),
-            "offscreen_loc": (letters_x_start + 32 + 3, 240),
-            "onscreen_loc": (letters_x_start + 32 + 3, 50 + 39),
+            "offscreen_loc": (letters_x_start + 32 + 3 - 1, 240),
+            "onscreen_loc": (letters_x_start + 32 + 3 - 1, 50 + 39),
             "move_duration": 0.45,
             "overshoot_pixels": 20,
             "eased_value": None,
@@ -403,12 +418,13 @@ coordinator = {
             "sprite_anim_start": 0.347,
             "started": False,
         },
+        # M fly on
         {
             "type": "animation_step",
             "tilegrid": TileGrid(m_sprites, pixel_shader=m_sprites_palette,
                                  tile_width=44, tile_height=39, width=1, height=1),
-            "offscreen_loc": (letters_x_start + 32 + 3 + 33 + 2, 240),
-            "onscreen_loc": (letters_x_start + 32 + 3 + 33 + 2, 50 + 39),
+            "offscreen_loc": (letters_x_start + 32 + 3 + 33 + 2 -1, 240),
+            "onscreen_loc": (letters_x_start + 32 + 3 + 33 + 2 -1, 50 + 39),
             "move_duration": 0.45,
             "overshoot_pixels": 20,
             "eased_value": None,
@@ -437,7 +453,7 @@ for step in coordinator["steps"]:
     step["tilegrid"].y = step["offscreen_loc"][1]
     step["animator"] = OvershootAnimator(step["tilegrid"])
 
-
+# F bounce up from J impact
 coordinator["steps"].insert(8,
     {
         "type": "animation_step",
@@ -456,14 +472,14 @@ coordinator["steps"].insert(8,
         "started": False,
     },
 )
-
+# R bounce up from A impact
 coordinator["steps"].insert(10,
     {
         "type": "animation_step",
         "tilegrid": coordinator["steps"][2]["tilegrid"],
         "animator": coordinator["steps"][2]["animator"],
-        "offscreen_loc": (letters_x_start + 32 + 3, 240),
-        "onscreen_loc": (letters_x_start + 32 + 3, 50),
+        "offscreen_loc": (letters_x_start + 32 + 3 - 1, 240),
+        "onscreen_loc": (letters_x_start + 32 + 3 - 1, 50),
         "move_duration": 0.3,
         "overshoot_pixels": 10,
         "eased_value": None,
@@ -475,14 +491,14 @@ coordinator["steps"].insert(10,
         "started": False,
     },
 )
-
+# U bounce up from M impact
 coordinator["steps"].append(
     {
         "type": "animation_step",
         "tilegrid": coordinator["steps"][4]["tilegrid"],
         "animator": coordinator["steps"][4]["animator"],
-        "offscreen_loc": (letters_x_start + (32 + 3) * 2, 240),
-        "onscreen_loc": (letters_x_start + (32 + 3) * 2, 50),
+        "offscreen_loc": (letters_x_start + (32 + 3) * 2 - 1, 240),
+        "onscreen_loc": (letters_x_start + (32 + 3) * 2 - 1, 50),
         "move_duration": 0.3,
         "overshoot_pixels": 10,
         "eased_value": None,
@@ -494,14 +510,14 @@ coordinator["steps"].append(
         "started": False,
     },
 )
-
+# I bounce up from M impact
 coordinator["steps"].append(
     {
         "type": "animation_step",
         "tilegrid": coordinator["steps"][5]["tilegrid"],
         "animator": coordinator["steps"][5]["animator"],
-        "offscreen_loc": (letters_x_start + (32 + 3) * 3 , 240),
-        "onscreen_loc": (letters_x_start + (32 + 3) * 3, 50),
+        "offscreen_loc": (letters_x_start + (32 + 3) * 3 -1, 240),
+        "onscreen_loc": (letters_x_start + (32 + 3) * 3 -1, 50),
         "move_duration": 0.3,
         "overshoot_pixels": 10,
         "eased_value": None,
@@ -513,14 +529,14 @@ coordinator["steps"].append(
         "started": False,
     },
 )
-
+# T bounce up from M impact
 coordinator["steps"].append(
     {
         "type": "animation_step",
         "tilegrid": coordinator["steps"][6]["tilegrid"],
         "animator": coordinator["steps"][6]["animator"],
-        "offscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3, 240),
-        "onscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3, 50),
+        "offscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3 -1, 240),
+        "onscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3 -1, 50),
         "move_duration": 0.3,
         "overshoot_pixels": 10,
         "eased_value": None,
@@ -532,7 +548,7 @@ coordinator["steps"].append(
         "started": False,
     },
 )
-
+# color red
 coordinator["steps"].append(
     {
         "start_time": 4.75,
@@ -541,6 +557,7 @@ coordinator["steps"].append(
         "started": False,
     }
 )
+# color yellow
 coordinator["steps"].append(
     {
         "start_time": 5,
@@ -549,6 +566,7 @@ coordinator["steps"].append(
         "started": False,
     }
 )
+# color teal
 coordinator["steps"].append(
     {
         "start_time": 5.25,
@@ -557,6 +575,7 @@ coordinator["steps"].append(
         "started": False,
     }
 )
+# color pink
 coordinator["steps"].append(
     {
         "start_time": 5.5,
@@ -565,6 +584,7 @@ coordinator["steps"].append(
         "started": False,
     }
 )
+# color blue
 coordinator["steps"].append(
     {
         "start_time": 5.75,
@@ -573,6 +593,7 @@ coordinator["steps"].append(
         "started": False,
     }
 )
+# color green
 coordinator["steps"].append(
     {
         "start_time": 6.00,
@@ -581,6 +602,7 @@ coordinator["steps"].append(
         "started": False,
     }
 )
+# Apple eyes blink
 coordinator["steps"].append(
     {
         "type": "animation_step",
@@ -599,6 +621,7 @@ coordinator["steps"].append(
         "started": False,
     }
 )
+# Apple eyes blink again
 coordinator["steps"].append(
     {
         "type": "animation_step",
@@ -675,6 +698,6 @@ while True:
         # reset the apple to no eyes sprite
         coordinator["steps"][0]["tilegrid"][0] = 0
 
-        time.sleep(1)
+        time.sleep(3)
         display.refresh()
         start_time = adafruit_ticks.ticks_ms() / 1000
