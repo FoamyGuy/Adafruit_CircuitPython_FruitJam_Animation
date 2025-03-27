@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2025 Tim Cocks for Adafruit Industries
 #
 # SPDX-License-Identifier: MIT
+import gc
+
 import displayio
 import supervisor
 from displayio import OnDiskBitmap, TileGrid, Group
@@ -214,7 +216,13 @@ class OvershootAnimator:
         """Cancel the current animation."""
         self.pos_animating = False
 
+
+# 8172592
+# apple_sprites, apple_sprites_palette = adafruit_imageload.load("apple_spritesheet.bmp")
+
+# 8342576
 apple_sprites, apple_sprites_palette = adafruit_imageload.load("apple_spritesheet.bmp")
+print(f"free: {gc.mem_free()}")
 apple_sprites_palette.make_transparent(0)
 f_sprites, f_sprites_palette = adafruit_imageload.load("f_spritesheet.bmp")
 f_sprites_palette.make_transparent(0)
@@ -233,7 +241,7 @@ a_sprites_palette.make_transparent(0)
 m_sprites, m_sprites_palette = adafruit_imageload.load("m_spritesheet.bmp")
 m_sprites_palette.make_transparent(0)
 
-# apple_sprites = OnDiskBitmap("apple_spritesheet.bmp")
+# apple_sprites = OnDiskBitmap("new_apple_spritesheet_rexport.bmp")
 # apple_sprites_palette = apple_sprites.pixel_shader
 # apple_sprites_palette.make_transparent(0)
 #
@@ -277,7 +285,7 @@ coordinator = {
         {
             "type": "animation_step",
             "tilegrid": TileGrid(apple_sprites, pixel_shader=apple_sprites_palette,
-                                 tile_width=72, tile_height=107, width=1, height=1),
+                                 tile_width=73, tile_height=107, width=1, height=1),
             "offscreen_loc": (0, -107),
             "onscreen_loc": (0, 21),
             "move_duration": 0.45,
@@ -295,7 +303,7 @@ coordinator = {
             "tilegrid": TileGrid(f_sprites, pixel_shader=f_sprites_palette,
                                  tile_width=32, tile_height=39, width=1, height=1),
             "offscreen_loc": (letters_x_start, 240),
-            "onscreen_loc": (letters_x_start, 50),
+            "onscreen_loc": (letters_x_start, 67),
             "move_duration": 0.45,
             "overshoot_pixels": 20,
             "eased_value": None,
@@ -312,7 +320,7 @@ coordinator = {
             "tilegrid": TileGrid(r_sprites, pixel_shader=r_sprites_palette,
                                  tile_width=32, tile_height=39, width=1, height=1),
             "offscreen_loc": (letters_x_start + 32 + 3 - 1, 240),
-            "onscreen_loc": (letters_x_start + 32 + 3 - 1, 50),
+            "onscreen_loc": (letters_x_start + 32 + 3 - 1, 67),
             "move_duration": 0.45,
             "overshoot_pixels": 20,
             "eased_value": None,
@@ -343,8 +351,8 @@ coordinator = {
             "type": "animation_step",
             "tilegrid": TileGrid(u_sprites, pixel_shader=u_sprites_palette,
                                  tile_width=32, tile_height=39, width=1, height=1),
-            "offscreen_loc": (letters_x_start + (32 + 3) * 2 -1, 240),
-            "onscreen_loc": (letters_x_start + (32 + 3) * 2 -1, 50),
+            "offscreen_loc": (letters_x_start + (32 + 3) * 2 -2, 240),
+            "onscreen_loc": (letters_x_start + (32 + 3) * 2 -2, 67),
             "move_duration": 0.45,
             "overshoot_pixels": 20,
             "eased_value": None,
@@ -359,8 +367,8 @@ coordinator = {
             "type": "animation_step",
             "tilegrid": TileGrid(i_sprites, pixel_shader=i_sprites_palette,
                                  tile_width=16, tile_height=39, width=1, height=1),
-            "offscreen_loc": (letters_x_start + (32 + 3) * 3 -1, 240),
-            "onscreen_loc": (letters_x_start + (32 + 3) * 3 -1, 50),
+            "offscreen_loc": (letters_x_start + (32 + 3) * 3 -3, 240),
+            "onscreen_loc": (letters_x_start + (32 + 3) * 3 -3, 67),
             "move_duration": 0.45,
             "overshoot_pixels": 20,
             "eased_value": None,
@@ -375,8 +383,8 @@ coordinator = {
             "type": "animation_step",
             "tilegrid": TileGrid(t_sprites, pixel_shader=t_sprites_palette,
                                  tile_width=32, tile_height=39, width=1, height=1),
-            "offscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3 -1, 240),
-            "onscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3 -1, 50),
+            "offscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3 -4, 240),
+            "onscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3 -4, 67),
             "move_duration": 0.45,
             "overshoot_pixels": 20,
             "eased_value": None,
@@ -394,44 +402,45 @@ coordinator = {
             "offscreen_loc": (letters_x_start, 240),
             "onscreen_loc": (letters_x_start, 50 + 39),
             "move_duration": 0.45,
-            "overshoot_pixels": 20,
+            "overshoot_pixels": 4,
             "eased_value": None,
             "sprite_anim_range": (0, 15),
             "sprite_delay": default_sprite_delay,
             "start_time": 2.7,
-            "sprite_anim_start": 0.347,
+            # "sprite_anim_start": 0.347,
+            "sprite_anim_start": 0.4,
             "started": False,
         },
         # A fly on
         {
             "type": "animation_step",
             "tilegrid": TileGrid(a_sprites, pixel_shader=a_sprites_palette,
-                                 tile_width=33, tile_height=39, width=1, height=1),
+                                 tile_width=32, tile_height=39, width=1, height=1),
             "offscreen_loc": (letters_x_start + 32 + 3 - 1, 240),
             "onscreen_loc": (letters_x_start + 32 + 3 - 1, 50 + 39),
             "move_duration": 0.45,
-            "overshoot_pixels": 20,
+            "overshoot_pixels": 4,
             "eased_value": None,
             "sprite_anim_range": (0, 15),
             "sprite_delay": default_sprite_delay,
             "start_time": 3.15,
-            "sprite_anim_start": 0.347,
+            "sprite_anim_start": 0.4,
             "started": False,
         },
         # M fly on
         {
             "type": "animation_step",
             "tilegrid": TileGrid(m_sprites, pixel_shader=m_sprites_palette,
-                                 tile_width=44, tile_height=39, width=1, height=1),
-            "offscreen_loc": (letters_x_start + 32 + 3 + 33 + 2 -1, 240),
-            "onscreen_loc": (letters_x_start + 32 + 3 + 33 + 2 -1, 50 + 39),
+                                 tile_width=43, tile_height=39, width=1, height=1),
+            "offscreen_loc": (letters_x_start + 32 + 3 + 32 + 2 -1, 240),
+            "onscreen_loc": (letters_x_start + 32 + 3 + 32 + 2 -1, 50 + 39),
             "move_duration": 0.45,
-            "overshoot_pixels": 20,
+            "overshoot_pixels": 4,
             "eased_value": None,
             "sprite_anim_range": (0, 15),
             "sprite_delay": default_sprite_delay,
             "start_time": 3.6,
-            "sprite_anim_start": 0.347,
+            "sprite_anim_start": 0.4,
             "started": False,
         }
 
@@ -460,14 +469,17 @@ coordinator["steps"].insert(8,
         "tilegrid": coordinator["steps"][1]["tilegrid"],
         "animator": coordinator["steps"][1]["animator"],
         "offscreen_loc": (letters_x_start, 240),
-        "onscreen_loc": (letters_x_start, 50),
+        "onscreen_loc": (letters_x_start, 52),
+        # "move_duration": 0.3,
         "move_duration": 0.3,
-        "overshoot_pixels": 10,
+        "overshoot_pixels": 22,
         "eased_value": None,
-        "sprite_anim_range": (16, 27),
+        "sprite_anim_range": (19, 27),
         "sprite_delay": 1/22,
         # "start_time": 4.08,
-        "start_time": 3.047,
+        # "start_time": 3.047,
+        "start_time": 3.0,
+        # "sprite_anim_start": 0.15,
         "sprite_anim_start": 0.15,
         "started": False,
     },
@@ -479,14 +491,15 @@ coordinator["steps"].insert(10,
         "tilegrid": coordinator["steps"][2]["tilegrid"],
         "animator": coordinator["steps"][2]["animator"],
         "offscreen_loc": (letters_x_start + 32 + 3 - 1, 240),
-        "onscreen_loc": (letters_x_start + 32 + 3 - 1, 50),
+        "onscreen_loc": (letters_x_start + 32 + 3 - 1, 52),
         "move_duration": 0.3,
-        "overshoot_pixels": 10,
+        "overshoot_pixels": 22,
         "eased_value": None,
-        "sprite_anim_range": (16, 27),
+        "sprite_anim_range": (19, 27),
         "sprite_delay": 1/22,
         #"start_time": 4.78,
-        "start_time": 3.497,
+        # "start_time": 3.497,
+        "start_time": 3.45,
         "sprite_anim_start": 0.15,
         "started": False,
     },
@@ -497,15 +510,16 @@ coordinator["steps"].append(
         "type": "animation_step",
         "tilegrid": coordinator["steps"][4]["tilegrid"],
         "animator": coordinator["steps"][4]["animator"],
-        "offscreen_loc": (letters_x_start + (32 + 3) * 2 - 1, 240),
-        "onscreen_loc": (letters_x_start + (32 + 3) * 2 - 1, 50),
+        "offscreen_loc": (letters_x_start + (32 + 3) * 2 - 2, 240),
+        "onscreen_loc": (letters_x_start + (32 + 3) * 2 -2, 52),
         "move_duration": 0.3,
-        "overshoot_pixels": 10,
+        "overshoot_pixels": 22,
         "eased_value": None,
-        "sprite_anim_range": (16, 27),
+        "sprite_anim_range": (19, 27),
         "sprite_delay": 1/22,
         # "start_time": 5.48,
-        "start_time": 3.947,
+        # "start_time": 3.947,
+        "start_time": 3.9,
         "sprite_anim_start": 0.15,
         "started": False,
     },
@@ -516,15 +530,16 @@ coordinator["steps"].append(
         "type": "animation_step",
         "tilegrid": coordinator["steps"][5]["tilegrid"],
         "animator": coordinator["steps"][5]["animator"],
-        "offscreen_loc": (letters_x_start + (32 + 3) * 3 -1, 240),
-        "onscreen_loc": (letters_x_start + (32 + 3) * 3 -1, 50),
+        "offscreen_loc": (letters_x_start + (32 + 3) * 3 -3, 240),
+        "onscreen_loc": (letters_x_start + (32 + 3) * 3 -3, 52),
         "move_duration": 0.3,
-        "overshoot_pixels": 10,
+        "overshoot_pixels": 22,
         "eased_value": None,
-        "sprite_anim_range": (16, 27),
+        "sprite_anim_range": (19, 27),
         "sprite_delay": 1/22,
         # "start_time": 5.58,
-        "start_time": 4.047,
+        # "start_time": 4.047,
+        "start_time": 4.00,
         "sprite_anim_start": 0.15,
         "started": False,
     },
@@ -535,15 +550,16 @@ coordinator["steps"].append(
         "type": "animation_step",
         "tilegrid": coordinator["steps"][6]["tilegrid"],
         "animator": coordinator["steps"][6]["animator"],
-        "offscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3 -1, 240),
-        "onscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3 -1, 50),
+        "offscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3 -4, 240),
+        "onscreen_loc": (letters_x_start + (32 + 3) * 3 + 16 + 3 -4, 52),
         "move_duration": 0.3,
-        "overshoot_pixels": 10,
+        "overshoot_pixels": 22,
         "eased_value": None,
-        "sprite_anim_range": (16, 27),
+        "sprite_anim_range": (19, 27),
         "sprite_delay": 1/22,
         # "start_time": 5.68,
-        "start_time": 4.147,
+        # "start_time": 4.147,
+        "start_time": 4.1,
         "sprite_anim_start": 0.15,
         "started": False,
     },
@@ -632,7 +648,7 @@ coordinator["steps"].append(
         "move_duration": 0.01,
         "overshoot_pixels": 0,
         "eased_value": None,
-        "sprite_anim_range": (12, 27),
+        "sprite_anim_range": (13, 18),
         "sprite_delay": 1/32,
         # "start_time": 5.68,
         "start_time": 8.55,
@@ -642,6 +658,14 @@ coordinator["steps"].append(
 )
 
 display.root_group = main_group
+
+# hrule = displayio.Bitmap(200, 1, 1)
+# hrule_palette = displayio.Palette(1)
+# hrule_palette[0] = 0xff0000
+# hrule_tg = TileGrid(bitmap=hrule, pixel_shader=hrule_palette)
+# main_group.append(hrule_tg)
+# hrule_tg.y = 59
+# hrule_tg.x = 40
 
 start_time = adafruit_ticks.ticks_ms() / 1000
 
@@ -698,6 +722,6 @@ while True:
         # reset the apple to no eyes sprite
         coordinator["steps"][0]["tilegrid"][0] = 0
 
-        time.sleep(3)
+        time.sleep(2)
         display.refresh()
         start_time = adafruit_ticks.ticks_ms() / 1000
