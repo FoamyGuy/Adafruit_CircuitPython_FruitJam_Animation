@@ -6,7 +6,6 @@ import gc
 import displayio
 import supervisor
 from displayio import OnDiskBitmap, TileGrid, Group
-import adafruit_ticks
 import adafruit_imageload
 import time
 import math
@@ -71,7 +70,7 @@ class OvershootAnimator:
         - overshoot_pixels: How many pixels to overshoot beyond the target
                             (use 0 for no overshoot)
         """
-        _now = adafruit_ticks.ticks_ms() / 1000
+        _now = time.monotonic()
 
         # Record starting position and time
         self.start_x = self.element.x
@@ -145,7 +144,7 @@ class OvershootAnimator:
         - False if the animation has completed
         """
         still_sprite_animating = False
-        _now = adafruit_ticks.ticks_ms() / 1000
+        _now = time.monotonic()
         if self.cur_sprite_index is not None:
             if _now >= self.sprite_anim_start_time:
 
@@ -241,7 +240,7 @@ a_sprites_palette.make_transparent(0)
 m_sprites, m_sprites_palette = adafruit_imageload.load("m_spritesheet.bmp")
 m_sprites_palette.make_transparent(0)
 
-# apple_sprites = OnDiskBitmap("new_apple_spritesheet_rexport.bmp")
+# apple_sprites = OnDiskBitmap("apple_spritesheet.bmp")
 # apple_sprites_palette = apple_sprites.pixel_shader
 # apple_sprites_palette.make_transparent(0)
 #
@@ -667,11 +666,11 @@ display.root_group = main_group
 # hrule_tg.y = 59
 # hrule_tg.x = 40
 
-start_time = adafruit_ticks.ticks_ms() / 1000
+start_time = time.monotonic()
 
 while True:
 
-    now = adafruit_ticks.ticks_ms() / 1000
+    now = time.monotonic()
     still_going = True
 
     for i, step in enumerate(coordinator["steps"]):
@@ -724,4 +723,4 @@ while True:
 
         time.sleep(2)
         display.refresh()
-        start_time = adafruit_ticks.ticks_ms() / 1000
+        start_time = time.monotonic()
